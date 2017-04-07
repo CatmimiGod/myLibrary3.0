@@ -115,7 +115,6 @@ package SJL.display
 		public function goPage(page:String = "0",obj:Object = null):void
 		{
 			var url:String = getItemUrl(page);
-			//trace("page:",page)
 			if (url != null && url != "")
 			{
 				_currentPage = page;
@@ -250,11 +249,21 @@ package SJL.display
 		{
 			var len:int = 0;
 			var arr:Array = page.split("/");
+			/**减少一位直接获取上一级的长度*/
+			arr.pop();
+			
 			var tempXML:XML = configData.content[0];
-			for (var i:int; i < arr.length; i++)
+			
+			if (arr.length == 0)
+			{
+				len = tempXML[keyName].length();
+			}
+			
+			for (var i:int = 0; i < arr.length; i++)
 			{
 				if (tempXML.hasOwnProperty(keyName))
 				{
+					tempXML = tempXML[keyName].(@["page"] == arr[i])[0];
 					len = tempXML[keyName].length();
 				}
 			}

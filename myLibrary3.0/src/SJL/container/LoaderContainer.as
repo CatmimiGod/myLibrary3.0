@@ -99,7 +99,6 @@ package SJL.container
 							break;
 					}
 				}
-				
 				AS.callProperty(mc, func, args, true);
 			}
 		}
