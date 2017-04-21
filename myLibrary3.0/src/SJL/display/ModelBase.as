@@ -115,9 +115,15 @@ package SJL.display
 		public function goPage(page:String = "0",obj:Object = null):void
 		{
 			var url:String = getItemUrl(page);
+			/**如果有会覆盖obj的值,只允许一个启动参数*/
+			var args:Object = Object(getParamsMessage("content", "item", "page", page, "@args"));
 			if (url != null && url != "")
 			{
 				_currentPage = page;
+				if (args != null)
+				{
+					obj = args;
+				}
 				_loaderContainer.load(url,obj);
 			}
 		}
@@ -282,10 +288,10 @@ package SJL.display
 		 * @return
 		 */
 		protected function getParamsMessage(mainName:String = "content", subName:String = "item", 
-		keyName:String = "page" , key:String = "0" , params:String="@url"):String
+		keyName:String = "page" , page:String = "0" , params:String="@url"):String
 		{
 			var url:String = "";
-			var arr:Array = key.split("/");
+			var arr:Array = page.split("/");
 			var tempXML:XML = configData[mainName][0];
 			for (var i:int; i < arr.length; i++)
 			{

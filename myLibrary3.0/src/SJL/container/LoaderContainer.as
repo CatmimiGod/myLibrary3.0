@@ -109,6 +109,7 @@ package SJL.container
 		private function loadIMG():void
 		{
 			var bm:Bitmap = _loader.content as Bitmap;
+			bm.smoothing = true;
 			_con.addChild(bm);
 			this.dispatchEvent(new LoaderContainerEvent(LoaderContainerEvent.UP_DATA_IMG));
 		}
